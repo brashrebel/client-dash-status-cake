@@ -1,0 +1,35 @@
+=== Client Dash Status Cake Add on ===
+
+Contributors: BrashRebel
+Tags: client, portal, dashboard, admin, reporting
+Requires at least: 3.8.0
+Tested up to: 3.9.1
+Stable tag: 0.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+== Description ==
+
+= What it does =
+
+This plugin brings the amazing uptime reporting power of Status Cake into the WordPress dashboard by integrating with Client Dash.
+
+= Requirements =
+
+* An account on Status Cake
+* [Client Dash] (http://wordpress.org/plugins/client-dash) plugin version 1.2.1 or higher
+
+== Installation ==
+
+Using this plugin is very simple. All you have to do is:
+
+1. Upload the `client-dash-status-cake` folder to the `/wp-content/plugins/` directory
+
+2. Activate the plugin through the 'Plugins' menu in WordPress
+
+
+== Changelog ==
+
+= 0.1 =
+
+* Initial version
