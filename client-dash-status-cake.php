@@ -2,7 +2,7 @@
 /*
 Plugin Name: Client Dash Status Cake Add-on
 Description: Integrates Status Cake with Client Dash
-Version: 0.1
+Version: 0.2
 Author: Kyle Maurer
 Author URI: http://realbigmarketing.com/staff/kyle
 */

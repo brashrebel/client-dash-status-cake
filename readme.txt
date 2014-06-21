@@ -4,7 +4,7 @@ Contributors: BrashRebel
 Tags: client, portal, dashboard, admin, reporting
 Requires at least: 3.8.0
 Tested up to: 3.9.1
-Stable tag: 0.1
+Stable tag: 0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,12 @@ Using this plugin is very simple. All you have to do is:
 
 
 == Changelog ==
+
+= 0.2 =
+
+* Now option for specifying which test
+* Added checks for valid settings and return relevant message
+* Render all useful information in standard table layout
 
 = 0.1 =
 
