@@ -111,7 +111,13 @@ class CDStatusCake {
 		$content = json_decode( $content );
 		// Uncomment the next line to see the raw data
 		//print_r($content);
-		if ( is_wp_error( $content ) OR empty( $content ) OR !empty($content->Error) ) {
+		if ( empty( $un) ) {
+			echo '<h2>Please enter a valid Status Cake username in <a href="'.cd_get_settings_url().'">Settings</a></h2>';
+		} elseif ( empty( $api) ) {
+			echo '<h2>Please enter a valid Status Cake API key in <a href="'.cd_get_settings_url().'">Settings</a></h2>';
+		} elseif ( empty( $test ) ) {
+			echo '<h2>Please enter a valid Status Cake test ID in <a href="'.cd_get_settings_url().'">Settings</a></h2>';
+		} elseif ( is_wp_error( $content ) OR empty( $content ) OR !empty($content->Error) ) {
 		echo '<h2>Please enter valid Status Cake test values in <a href="'.cd_get_settings_url().'">Settings</a></h2>';
 		} else {
 		?>
@@ -142,7 +148,7 @@ class CDStatusCake {
 			</tr>
 			<tr valign="top">
 				<th scope="row">Uptime</th>
-				<td><?php echo $content->Uptime; ?></td>
+				<td><?php echo $content->Uptime; ?>%</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row">Check rate</th>
