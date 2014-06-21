@@ -101,9 +101,44 @@ class CDStatusCake {
 	public function tab_contents() {
 		$un = get_option( $this->pre.$this->username );
 		$api = get_option( $this->pre.$this->api );
-		$content = wp_remote_get( 'https://statuscake.com/API/Tests/?API='. $api .'&Username='. $un );
-		print_r($content);
+		$content = wp_remote_retrieve_body( wp_remote_get( 'https://statuscake.com/API/Tests/?API='. $api .'&Username='. $un ) );
+
+		$content = json_decode( $content );
+		//print_r($content);
+		?>
+		<table class="form-table">
+			<tr valign="top">
+				<th scope="row">Test ID</th>
+				<td><?php echo $content[0]->TestID; ?></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">Test Type</th>
+				<td><?php echo $content[0]->TestType; ?></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">Website Name</th>
+				<td><?php echo $content[0]->WebsiteName; ?></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">Contact Group</th>
+				<td><?php echo $content[0]->ContactGroup; ?></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">Status</th>
+				<td><?php echo $content[0]->Status; ?></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">Uptime</th>
+				<td><?php echo $content[0]->Uptime; ?></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">Performance</th>
+				<td><?php echo $content[0]->Performance; ?></td>
+			</tr>
+		</table>
+		<?php
 	}
 }
+
 // Instantiate the class
 $cdsc = new CDStatusCake;
