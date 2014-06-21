@@ -119,8 +119,8 @@ class CDStatusCake {
 
 	// Insert the tab contents
 	public function tab_contents() {
-		// CHANGE THIS
-		echo 'This is where your tab content goes.';
+		$content = wp_remote_get( 'https://statuscake.com/API/Tests/?API=Dc59Z32M2x1jdjvKXELL&Username=kyle' );
+		print_r($content);
 	}
 }
 // Instantiate the class
