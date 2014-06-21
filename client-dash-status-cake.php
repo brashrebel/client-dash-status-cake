@@ -111,6 +111,9 @@ class CDStatusCake {
 		$content = json_decode( $content );
 		// Uncomment the next line to see the raw data
 		//print_r($content);
+		if ( is_wp_error( $content ) OR empty( $content ) OR !empty($content->Error) ) {
+		echo '<h2>Please enter valid Status Cake test values in <a href="'.cd_get_settings_url().'">Settings</a></h2>';
+		} else {
 		?>
 		<table class="form-table">
 			<tr valign="top">
@@ -171,6 +174,7 @@ class CDStatusCake {
 			</tr>
 		</table>
 		<?php
+		}
 	}
 }
 
