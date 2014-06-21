@@ -22,19 +22,10 @@ class CDStatusCake {
 	private $tab = 'uptime';
 	// Set this to the page you want your tab to appear on (account, help and reports exist in Client Dash)
 	private $page = 'reports';
-
-	/*
-	* Now let's setup our options
-	* You can change the strings to be more unique
-	* If you change the variable names, you'll need to update the
-	* references in the register_settings() and settings_display() functions
-	*/
-	// A checkbox option
-	private $cb_option = '_checkbox';
 	// A text field option
-	private $text_option = '_text';
+	private $username = '_username';
 	// A URL/text field option
-	private $url_option = '_url';
+	private $api = '_api';
 
 	/*
 	* This constructor function sets up what happens when the plugin
@@ -62,17 +53,14 @@ class CDStatusCake {
 
 	// Register settings
 	public function register_settings() {
-		register_setting( 'cd_options_general', $this->pre.$this->cb_option );
-		register_setting( 'cd_options_general', $this->pre.$this->text_option, 'esc_html' );
-		register_setting( 'cd_options_general', $this->pre.$this->url_option, 'esc_url_raw' );
+		register_setting( 'cd_options_general', $this->pre.$this->username, 'esc_html' );
+		register_setting( 'cd_options_general', $this->pre.$this->api, 'esc_html' );
 	}
 
 	// Add settings to General tab
 	public function settings_display() {
-		$checkbox_option_name = $this->pre.$this->cb_option;
-		$checkbox_option = get_option( $checkbox_option_name );
-		$text_option = $this->pre.$this->text_option;
-		$url_option = $this->pre.$this->url_option;
+		$username = $this->pre.$this->username;
+		$api = $this->pre.$this->api;
 		?>
 	<table class="form-table">
 		<tbody>
@@ -81,30 +69,22 @@ class CDStatusCake {
 			</tr>
 			<tr valign="top">
 				<th scope="row">
-					<label for="<?php echo $checkbox_option_name; ?>">Checkbox setting</label>
+					<label for="<?php echo $username; ?>">Username</label>
 				</th>
-				<td><input type="hidden" name="<?php echo $checkbox_option_name; ?>" value="0" />
-					<input type="checkbox" name="<?php echo $checkbox_option_name; ?>" id="<?php echo $checkbox_option_name; ?>" value="1" <?php checked( '1', $checkbox_option); ?> />
+				<td><input type="text" 
+					id="<?php echo $username; ?>" 
+					name="<?php echo $username; ?>" 
+					value="<?php echo get_option( $username ); ?>" />
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row">
-					<label for="<?php echo $text_option; ?>">Text setting</label>
+					<label for="<?php echo $api; ?>">API key</label>
 				</th>
 				<td><input type="text" 
-					id="<?php echo $text_option; ?>" 
-					name="<?php echo $text_option; ?>" 
-					value="<?php echo get_option( $text_option ); ?>" />
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">
-					<label for="<?php echo $url_option; ?>">URL setting</label>
-				</th>
-				<td><input type="text" 
-					id="<?php echo $url_option; ?>" 
-					name="<?php echo $url_option; ?>" 
-					value="<?php echo get_option( $url_option ); ?>" />
+					id="<?php echo $api; ?>" 
+					name="<?php echo $api; ?>" 
+					value="<?php echo get_option( $api ); ?>" />
 				</td>
 			</tr>
 		</tbody>
@@ -119,7 +99,9 @@ class CDStatusCake {
 
 	// Insert the tab contents
 	public function tab_contents() {
-		$content = wp_remote_get( 'https://statuscake.com/API/Tests/?API=Dc59Z32M2x1jdjvKXELL&Username=kyle' );
+		$un = get_option( $this->pre.$this->username );
+		$api = get_option( $this->pre.$this->api );
+		$content = wp_remote_get( 'https://statuscake.com/API/Tests/?API='. $api .'&Username='. $un );
 		print_r($content);
 	}
 }
