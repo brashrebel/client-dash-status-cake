@@ -30,7 +30,7 @@ class CDStatusCake {
 		add_action( 'cd_'. $this->page .'_'. $this->tab .'_tab', array( $this, 'tab_contents' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'cd_settings_general_tab', array( $this, 'settings_display' ), 11 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_styles') );
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_styles'), 11 );
 	}
 
 	public function register_styles() {
@@ -134,26 +134,43 @@ class CDStatusCake {
 		} else {
 		?>
 		<div class="cdsc">
+			<div class="cd-col-two cdsc-status">
+				<h2>Status</h2>
+				<div>
+					<span class="dashicons dashicons-smiley">UP</span>
+				</div>
+			</div>
+			<div class="cd-col-two cdsc-uptime">
+				<h2>Uptime</h2>
+				<div>
+					<span class="dashicons dashicons-smiley">100%</span>
+				</div>
+			</div>
+			<div class="cd-col-two">
+				<h3>Test info</h3>
+				<ul>
+					<li><strong>Test ID:</strong> <?php echo $content->TestID; ?></li>
+					<li><strong>Contact ID:</strong> <?php echo $content->ContactID; ?></li>
+					<li><strong>Contact group:</strong> <?php echo $content->ContactGroup; ?></li>
+					<li><strong>Test type:</strong> <?php echo $content->TestType; ?></li>
+					<li><strong>Website host:</strong> <?php echo $content->WebsiteHost; ?></li>
+				</ul>
+			</div>
+			<div class="cd-col-two">
+				<h3>Stats</h3>
+				<ul>
+					<li><strong>Down times:</strong> <?php echo $content->DownTimes; ?></li>
+					<li><strong>Check rate:</strong> <?php echo $content->CheckRate; ?></li>
+					<li><strong>Timeout:</strong> <?php echo $content->Timeout; ?></li>
+					<li><strong>Last tested:</strong> <?php echo $content->LastTested; ?></li>
+					<li><strong>Next test location:</strong> <?php echo $content->NextLocation; ?></li>
+				</ul>
+			</div>
+		</div>
 			<table class="form-table">
-				<tr valign="top">
-					<th scope="row">Test ID</th>
-					<td><?php echo $content->TestID; ?></td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Test type</th>
-					<td><?php echo $content->TestType; ?></td>
-				</tr>
 				<tr valign="top">
 					<th scope="row">Website name</th>
 					<td><?php echo $content->WebsiteName; ?></td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Contact group</th>
-					<td><?php echo $content->ContactGroup; ?></td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Contact ID</th>
-					<td><?php echo $content->ContactID; ?></td>
 				</tr>
 				<tr valign="top">
 					<th scope="row">Status</th>
@@ -164,35 +181,11 @@ class CDStatusCake {
 					<td><?php echo $content->Uptime; ?>%</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row">Check rate</th>
-					<td><?php echo $content->CheckRate; ?></td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Timeout</th>
-					<td><?php echo $content->Timeout; ?></td>
-				</tr>
-				<tr valign="top">
 					<th scope="row">Logo</th>
 					<td><?php echo $content->LogoImage; ?></td>
 				</tr>
-				<tr valign="top">
-					<th scope="row">Website Host</th>
-					<td><?php echo $content->WebsiteHost; ?></td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Last tested</th>
-					<td><?php echo $content->LastTested; ?></td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Next test location</th>
-					<td><?php echo $content->NextLocation; ?></td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Down times</th>
-					<td><?php echo $content->DownTimes; ?></td>
-				</tr>
 			</table>
-		</div>
+		
 		<?php
 		}
 	}
