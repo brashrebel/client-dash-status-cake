@@ -30,18 +30,18 @@ class CDStatusCake {
 		add_action( 'cd_'. $this->page .'_'. $this->tab .'_tab', array( $this, 'tab_contents' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'cd_settings_general_tab', array( $this, 'settings_display' ), 11 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_cdsc_styles') );
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_styles') );
 	}
 
-	public function register_cdsc_styles() {
-		wp_register_style( 'cdsc', plugins_url( 'client-dash-status-cake/style.css' ) );
+	public function register_styles() {
+		wp_register_style( $this->pre, plugin_dir_url(__FILE__).'style.css' );
 		$page = get_current_screen();
 		$tab = $_GET['tab'];
 
 		if ( $page->id != $this->page && $tab != $this->tab )
 			return;
 
-		wp_enqueue_style( 'cdsc' );
+		wp_enqueue_style( $this->pre );
 	}
 
 	// Notices for if CD is not active (no need to change)
