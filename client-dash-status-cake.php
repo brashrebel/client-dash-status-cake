@@ -30,6 +30,18 @@ class CDStatusCake {
 		add_action( 'cd_'. $this->page .'_'. $this->tab .'_tab', array( $this, 'tab_contents' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'cd_settings_general_tab', array( $this, 'settings_display' ), 11 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_cdsc_styles') );
+	}
+
+	public function register_cdsc_styles() {
+		wp_register_style( 'cdsc', plugins_url( 'client-dash-status-cake/style.css' ) );
+		$page = get_current_screen();
+		$tab = $_GET['tab'];
+
+		if ( $page->id != $this->page && $tab != $this->tab )
+			return;
+
+		wp_enqueue_style( 'cdsc' );
 	}
 
 	// Notices for if CD is not active (no need to change)
@@ -121,64 +133,66 @@ class CDStatusCake {
 		echo '<h2>Please enter valid Status Cake test values in <a href="'.cd_get_settings_url().'">Settings</a></h2>';
 		} else {
 		?>
-		<table class="form-table">
-			<tr valign="top">
-				<th scope="row">Test ID</th>
-				<td><?php echo $content->TestID; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Test type</th>
-				<td><?php echo $content->TestType; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Website name</th>
-				<td><?php echo $content->WebsiteName; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Contact group</th>
-				<td><?php echo $content->ContactGroup; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Contact ID</th>
-				<td><?php echo $content->ContactID; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Status</th>
-				<td><?php echo $content->Status; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Uptime</th>
-				<td><?php echo $content->Uptime; ?>%</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Check rate</th>
-				<td><?php echo $content->CheckRate; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Timeout</th>
-				<td><?php echo $content->Timeout; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Logo</th>
-				<td><?php echo $content->LogoImage; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Website Host</th>
-				<td><?php echo $content->WebsiteHost; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Last tested</th>
-				<td><?php echo $content->LastTested; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Next test location</th>
-				<td><?php echo $content->NextLocation; ?></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Down times</th>
-				<td><?php echo $content->DownTimes; ?></td>
-			</tr>
-		</table>
+		<div class="cdsc">
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row">Test ID</th>
+					<td><?php echo $content->TestID; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Test type</th>
+					<td><?php echo $content->TestType; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Website name</th>
+					<td><?php echo $content->WebsiteName; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Contact group</th>
+					<td><?php echo $content->ContactGroup; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Contact ID</th>
+					<td><?php echo $content->ContactID; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Status</th>
+					<td><?php echo $content->Status; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Uptime</th>
+					<td><?php echo $content->Uptime; ?>%</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Check rate</th>
+					<td><?php echo $content->CheckRate; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Timeout</th>
+					<td><?php echo $content->Timeout; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Logo</th>
+					<td><?php echo $content->LogoImage; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Website Host</th>
+					<td><?php echo $content->WebsiteHost; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Last tested</th>
+					<td><?php echo $content->LastTested; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Next test location</th>
+					<td><?php echo $content->NextLocation; ?></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Down times</th>
+					<td><?php echo $content->DownTimes; ?></td>
+				</tr>
+			</table>
+		</div>
 		<?php
 		}
 	}
