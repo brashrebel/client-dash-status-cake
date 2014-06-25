@@ -10,29 +10,30 @@
 	text-align: center;
 }
 .cdsc-status span, .cdsc-uptime span {
-	font-size: 6em;
+	font-size: 5em;
+	color: #fff;
 }
 .cdsc-status div, .cdsc-uptime div {
 	padding: 20px;
 	background-color: gray;
-	min-height: 90px;
+	min-height: 80px;
 }
 .cdsc .dashicons {
 	display: inline;
 }
 /* Colors */
-.cdsc-ninety {
+.cdsc .cdsc-ninety {
 	background-color: #267213;
 }
-.cdsc-eighty {
+.cdsc .cdsc-eighty {
 	background-color: #6B942F;
 }
-.cdsc-seventy {
+.cdsc .cdsc-seventy {
 	background-color: #A9B83C;
 }
-.cdsc-sixty {
+.cdsc .cdsc-sixty {
 	background-color: #DAB130;
 }
-.cdsc-fifty {
+.cdsc .cdsc-fifty {
 	background-color: #DA4B30;
 }

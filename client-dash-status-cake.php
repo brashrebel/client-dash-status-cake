@@ -132,18 +132,57 @@ class CDStatusCake {
 		} elseif ( is_wp_error( $content ) OR empty( $content ) OR !empty($content->Error) ) {
 		echo '<h2>Please enter valid Status Cake test values in <a href="'.cd_get_settings_url().'">Settings</a></h2>';
 		} else {
+
+			$status = $content->Status;
+			$uptime = $content->Uptime;
 		?>
 		<div class="cdsc">
+			<h1><?php echo $content->WebsiteName; ?></h1>
 			<div class="cd-col-two cdsc-status">
 				<h2>Status</h2>
-				<div>
-					<span class="dashicons dashicons-smiley">UP</span>
+				<div class="
+				<?php
+					if ( $status == 'Up' ) {
+						echo 'cdsc-ninety';
+					} else {
+						echo 'cdsc-fifty';
+					} ?>
+					">
+					<span class="dashicons 
+					<?php
+					if ( $status == 'Up' ) {
+						echo 'dashicons-smiley';
+					} ?>
+					">
+						<?php echo $status; ?>
+					</span>
 				</div>
 			</div>
 			<div class="cd-col-two cdsc-uptime">
 				<h2>Uptime</h2>
-				<div>
-					<span class="dashicons dashicons-smiley">100%</span>
+				<div class="
+				<?php
+					if ( $uptime >= 90 ) {
+						echo 'cdsc-ninety';
+					} elseif ( $uptime >= 80 && $uptime <= 90 ) {
+						echo 'cdsc-eighty';
+					} elseif ( $uptime >= 70 && $uptime <= 80 ) {
+						echo 'cdsc-seventy';
+					} elseif ( $uptime >= 60 && $uptime <= 70 ) {
+						echo 'cdsc-sixty';
+					} elseif ( $uptime <= 60 ) {
+						echo 'cdsc-fifty';
+					}
+					?>
+				">
+					<span class="dashicons 
+					<?php
+					if ( $uptime >= 90 ) {
+						echo 'dashicons-smiley';
+					} ?>
+					">
+						<?php echo $uptime; ?>%
+					</span>
 				</div>
 			</div>
 			<div class="cd-col-two">
@@ -167,24 +206,6 @@ class CDStatusCake {
 				</ul>
 			</div>
 		</div>
-			<table class="form-table">
-				<tr valign="top">
-					<th scope="row">Website name</th>
-					<td><?php echo $content->WebsiteName; ?></td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Status</th>
-					<td><?php echo $content->Status; ?></td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Uptime</th>
-					<td><?php echo $content->Uptime; ?>%</td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Logo</th>
-					<td><?php echo $content->LogoImage; ?></td>
-				</tr>
-			</table>
 		
 		<?php
 		}
