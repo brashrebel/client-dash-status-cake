@@ -14,7 +14,7 @@ class CDStatusCake {
 	// Setup your prefix
 	private $pre = 'cdsc';
 	// Set this to be your tab name
-	private $tabname = 'Uptime';
+	private $block_name = 'Uptime';
 	// Set the tab slug
 	private $tab = 'uptime';
 	// Set this to the page you want your tab to appear on (account, help and reports exist in Client Dash)
@@ -26,11 +26,14 @@ class CDStatusCake {
 
 	public function __construct() {
 		add_action( 'admin_notices', array( $this, 'notices' ) );
-		add_filter( 'cd_tabs', array( $this, 'add_tab' ) );
-		add_action( 'cd_'. $this->page .'_'. $this->tab .'_tab', array( $this, 'tab_contents' ) );
+		add_action( 'plugins_loaded', array( $this, 'content_block' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'cd_settings_general_tab', array( $this, 'settings_display' ), 11 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_styles'), 11 );
+	}
+
+	public function content_block() {
+		cd_content_block( $this->block_name, $this->page, $this->tab, array( $this, 'block_contents' ) );
 	}
 
 	public function register_styles() {
@@ -38,7 +41,7 @@ class CDStatusCake {
 		$page = get_current_screen();
 		$tab = $_GET['tab'];
 
-		if ( $page->id != $this->page && $tab != $this->tab )
+		if ( $page->id != 'dashboard_page_cd_'.$this->page && $tab != $this->tab )
 			return;
 
 		wp_enqueue_style( $this->pre );
@@ -107,14 +110,8 @@ class CDStatusCake {
 	</table>
 	<?php }
 
-	// Add the new tab (no need to change)
-	public function add_tab( $tabs ) {
-	$tabs[$this->page][$this->tabname] = $this->tab;
-	return $tabs;
-	}
-
-	// Insert the tab contents
-	public function tab_contents() {
+	// Insert the Status Cake report data
+	public function block_contents() {
 		$un = get_option( $this->pre.$this->username );
 		$api = get_option( $this->pre.$this->api );
 		$test = get_option( $this->pre.$this->test );
