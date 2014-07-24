@@ -2,7 +2,7 @@
 /*
 Plugin Name: Client Dash Status Cake Add-on
 Description: Integrates Status Cake with Client Dash
-Version: 0.2
+Version: 0.2.1
 Author: Kyle Maurer
 Author URI: http://realbigmarketing.com/staff/kyle
 */
@@ -51,7 +51,7 @@ class CDStatusCake {
 	public function notices() {
 		if ( !is_plugin_active( 'client-dash/client-dash.php' ) ) { ?>
 		<div class="error">
-			<p><?php echo $this->plugin; ?> requires <a href="http://w.org/plugins/client-dash">Client Dash</a>.
+			<p><?php echo $this->plugin; ?> requires <a href="http://w.org/plugins/client-dash">Client Dash</a> version 1.4 or greater.
 			Please install and activate <b>Client Dash</b> to continue using.</p>
 		</div>
 		<?php
